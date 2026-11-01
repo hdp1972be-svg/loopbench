@@ -1,0 +1,226 @@
+name: Ryzen benchmark
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+    inputs:
+      u:
+        description: "Modulo divisor (u)"
+        required: true
+        default: "97"
+        type: string
+
+      r:
+        description: "Array index parameter (r)"
+        required: true
+        default: "7"
+        type: string
+
+      repetitions:
+        description: "Benchmark repetitions"
+        required: true
+        default: "5"
+        type: string
+
+      cpu:
+        description: "CPU core to pin to (empty = no pinning)"
+        required: false
+        default: ""
+        type: string
+
+      perf:
+        description: "Collect perf hardware counters"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ryzen-benchmark
+  cancel-in-progress: false
+
+jobs:
+  benchmark:
+    name: Run benchmark on Ryzen
+    runs-on: [self-hosted, linux, x64, ryzen]
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install benchmark dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sudo apt-get update
+
+          sudo apt-get install -y \
+            build-essential \
+            gcc \
+            clang \
+            binutils \
+            linux-tools-common \
+            linux-tools-generic \
+            git \
+            coreutils \
+            util-linux
+
+          # Install matching perf package when available.
+          PERF_PACKAGE="linux-tools-$(uname -r)"
+
+          if apt-cache show "$PERF_PACKAGE" >/dev/null 2>&1; then
+            sudo apt-get install -y "$PERF_PACKAGE"
+          else
+            echo "::warning::No matching kernel-specific perf package: $PERF_PACKAGE"
+          fi
+
+      - name: Check benchmark dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for cmd in gcc clang objdump sha256sum taskset; do
+            command -v "$cmd" || {
+              echo "::error::Missing required command: $cmd"
+              exit 1
+            }
+          done
+
+          gcc --version
+          clang --version
+          objdump --version
+
+          if command -v perf >/dev/null 2>&1; then
+            perf --version
+          else
+            echo "::warning::perf is unavailable"
+          fi
+
+      - name: Validate runner and scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "Hostname: $(hostname)"
+          echo "Architecture: $(uname -m)"
+          echo "Kernel: $(uname -r)"
+
+          test -x scripts/run-benchmark.sh
+          test -x scripts/collect-system-info.sh
+          test -f src/loopbench.c
+
+      - name: Mark benchmark start
+        shell: bash
+        run: |
+          mkdir -p results
+          touch .benchmark-start-marker
+
+      - name: Run benchmark
+        shell: bash
+        env:
+          CPU: ${{ inputs.cpu || '' }}
+          PERF: ${{ inputs.perf == false && '0' || '1' }}
+        run: |
+          set -euo pipefail
+
+          ./scripts/run-benchmark.sh \
+            "${{ inputs.u || '97' }}" \
+            "${{ inputs.r || '7' }}" \
+            "${{ inputs.repetitions || '5' }}"
+
+      - name: Collect benchmark results
+        id: collect
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p artifact
+
+          RESULT_DIR="$(
+            find results \
+              -mindepth 1 \
+              -maxdepth 1 \
+              -type d \
+              -newer .benchmark-start-marker \
+              -print -quit
+          )"
+
+          if [[ -z "$RESULT_DIR" ]]; then
+            echo "::warning::No benchmark result directory found"
+            exit 0
+          fi
+
+          cp -a "$RESULT_DIR" artifact/
+
+          echo "path=artifact" >> "$GITHUB_OUTPUT"
+
+          echo "Collected results:"
+          find artifact -type f -printf '%p (%s bytes)\n'
+
+      - name: Upload benchmark results
+        if: always() && steps.collect.outputs.path != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ryzen-benchmark-${{ github.run_number }}
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 90
+
+  publish:
+    name: Publish benchmark artifact
+    needs: benchmark
+    if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      actions: read
+
+    steps:
+      - name: Download benchmark artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ryzen-benchmark-${{ github.run_number }}
+          path: benchmark-results
+
+      - name: Create archive and checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ARCHIVE="ryzen-benchmark-${GITHUB_SHA::12}-${GITHUB_RUN_NUMBER}.tar.gz"
+
+          tar -czf "$ARCHIVE" benchmark-results/
+
+          sha256sum "$ARCHIVE" > "$ARCHIVE.sha256"
+
+          echo "ARCHIVE=$ARCHIVE" >> "$GITHUB_ENV"
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TAG="benchmark-${GITHUB_RUN_NUMBER}"
+
+          gh release create "$TAG" \
+            "$ARCHIVE" \
+            "$ARCHIVE.sha256" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Ryzen benchmark run ${GITHUB_RUN_NUMBER}" \
+            --notes "Automated Ryzen benchmark results.
+
+          Commit: ${GITHUB_SHA}
+          Runner: self-hosted Ryzen
+          Workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            --latest=false

@@ -1,0 +1,22 @@
+Nested loop benchmark
+---------------------
+Outer loops : 10000
+Inner loops : 100000
+Total       : 1000000000
+Modulo u    : 97
+Index r     : 7
+Repetitions : 5
+
+Run 1: 2620.365 ms | 2.620 ns/iteration | checksum: 47996920000
+Run 2: 2690.481 ms | 2.690 ns/iteration | checksum: 47996920000
+Run 3: 2640.064 ms | 2.640 ns/iteration | checksum: 47996920000
+Run 4: 2750.404 ms | 2.750 ns/iteration | checksum: 47996920000
+Run 5: 2590.727 ms | 2.591 ns/iteration | checksum: 47996920000
+
+Results
+-------
+Average : 2658.408 ms
+Best    : 2590.727 ms
+Best throughput: 0.39 billion iterations/s
+Best ns/iteration: 2.5907
+Final sink: 47996920000
