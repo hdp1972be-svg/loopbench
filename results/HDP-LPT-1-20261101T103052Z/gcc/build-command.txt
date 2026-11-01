@@ -1,1 +1,0 @@
-gcc -O3 -march=native -Wall -Wextra -std=c11 -o /home/i/loopbench/results/HDP-LPT-1-20261101T103052Z/gcc/loopbench /home/i/loopbench/src/loopbench.c

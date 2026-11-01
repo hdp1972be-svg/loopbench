@@ -1,0 +1,135 @@
+Run log: /home/i/loopbench/20261101T153903Z-loopbench.run.txt
+============================================================
+ MACHINE SPECIFICATIONS
+============================================================
+Host        : HDP-LPT-1
+Kernel      : 5.15.0-124-generic
+Architecture: x86_64
+Date        : 2026-11-01T16:39:03+01:00
+
+Processor   : Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz
+Logical     : 4 cores
+Physical    : 2 cores
+ISA flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+L1 data     : 32K
+L1 instr    : 32K
+L2 cache    : 256K
+L3 cache    : 4096K
+RAM         : 7921144 kB
+gcc         : gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0
+clang       : clang version 10.0.0-4ubuntu1 
+CPU speed   : 2700002 kHz
+Temp        : 57°C
+Governor    : powersave
+no_hz       : N/A
+no_irq      : irqpoll
+
+============================================================
+ RUNNING BENCHMARKS (u=97 r=7 repetitions=5)
+============================================================
+
+------------------------------------------------------------
+ loopbench-clang
+------------------------------------------------------------
+Nested loop benchmark
+---------------------
+Outer loops : 10000
+Inner loops : 100000
+Total       : 1000000000
+Modulo u    : 97
+Index r     : 7
+Repetitions : 5
+
+Run 1: 3276.848 ms | 3.277 ns/iteration | checksum: 47996920000
+Run 2: 3079.979 ms | 3.080 ns/iteration | checksum: 47996920000
+Run 3: 3104.939 ms | 3.105 ns/iteration | checksum: 47996920000
+Run 4: 3076.409 ms | 3.076 ns/iteration | checksum: 47996920000
+Run 5: 3171.754 ms | 3.172 ns/iteration | checksum: 47996920000
+
+Results
+-------
+Average : 3141.986 ms
+Best    : 3076.409 ms
+Best throughput: 0.33 billion iterations/s
+Best ns/iteration: 3.0764
+Final sink: 47996920000
+
+------------------------------------------------------------
+ loopbench-gcc
+------------------------------------------------------------
+Nested loop benchmark
+---------------------
+Outer loops : 10000
+Inner loops : 100000
+Total       : 1000000000
+Modulo u    : 97
+Index r     : 7
+Repetitions : 5
+
+Run 1: 3648.844 ms | 3.649 ns/iteration | checksum: 47996920000
+Run 2: 3825.205 ms | 3.825 ns/iteration | checksum: 47996920000
+Run 3: 3576.998 ms | 3.577 ns/iteration | checksum: 47996920000
+Run 4: 3531.912 ms | 3.532 ns/iteration | checksum: 47996920000
+Run 5: 3869.618 ms | 3.870 ns/iteration | checksum: 47996920000
+
+Results
+-------
+Average : 3690.515 ms
+Best    : 3531.912 ms
+Best throughput: 0.28 billion iterations/s
+Best ns/iteration: 3.5319
+Final sink: 47996920000
+
+------------------------------------------------------------
+ loopbench-gcc-12
+------------------------------------------------------------
+Nested loop benchmark
+---------------------
+Outer loops : 10000
+Inner loops : 100000
+Total       : 1000000000
+Modulo u    : 97
+Index r     : 7
+Repetitions : 5
+
+Run 1: 3751.233 ms | 3.751 ns/iteration | checksum: 47996920000
+Run 2: 3409.948 ms | 3.410 ns/iteration | checksum: 47996920000
+Run 3: 3642.680 ms | 3.643 ns/iteration | checksum: 47996920000
+Run 4: 3518.867 ms | 3.519 ns/iteration | checksum: 47996920000
+Run 5: 3394.468 ms | 3.394 ns/iteration | checksum: 47996920000
+
+Results
+-------
+Average : 3543.439 ms
+Best    : 3394.468 ms
+Best throughput: 0.29 billion iterations/s
+Best ns/iteration: 3.3945
+Final sink: 47996920000
+
+------------------------------------------------------------
+ loopbench-gcc-9
+------------------------------------------------------------
+Nested loop benchmark
+---------------------
+Outer loops : 10000
+Inner loops : 100000
+Total       : 1000000000
+Modulo u    : 97
+Index r     : 7
+Repetitions : 5
+
+Run 1: 3507.563 ms | 3.508 ns/iteration | checksum: 47996920000
+Run 2: 3489.182 ms | 3.489 ns/iteration | checksum: 47996920000
+Run 3: 2943.992 ms | 2.944 ns/iteration | checksum: 47996920000
+Run 4: 2933.511 ms | 2.934 ns/iteration | checksum: 47996920000
+Run 5: 2910.149 ms | 2.910 ns/iteration | checksum: 47996920000
+
+Results
+-------
+Average : 3156.879 ms
+Best    : 2910.149 ms
+Best throughput: 0.34 billion iterations/s
+Best ns/iteration: 2.9101
+Final sink: 47996920000
+
+All benches complete.

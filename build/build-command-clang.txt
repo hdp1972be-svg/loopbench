@@ -1,0 +1,1 @@
+clang -O3 -march=native -Wall -Wextra -std=c11 -o /home/i/loopbench/build/loopbench-clang /home/i/loopbench/src/loopbench.c

@@ -1,3 +1,0 @@
-u=97 r=7 repetitions=5
-CPU affinity=unrestricted
-Compiler flags=-O3 -march=native -Wall -Wextra -std=c11
