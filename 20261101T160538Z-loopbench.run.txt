@@ -1,11 +1,11 @@
-Run log: /home/i/loopbench/20261101T153903Z-loopbench.run.txt
+Run log: /home/i/loopbench/20261101T160538Z-loopbench.run.txt
 ============================================================
  MACHINE SPECIFICATIONS
 ============================================================
 Host        : HDP-LPT-1
 Kernel      : 5.15.0-124-generic
 Architecture: x86_64
-Date        : 2026-11-01T16:39:03+01:00
+Date        : 2026-11-01T17:05:38+01:00
 
 Processor   : Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz
 Logical     : 4 cores
@@ -18,8 +18,8 @@ L3 cache    : 4096K
 RAM         : 7921144 kB
 gcc         : gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0
 clang       : clang version 10.0.0-4ubuntu1 
-CPU speed   : 2700002 kHz
-Temp        : 57°C
+CPU speed   : 2298559 kHz
+Temp        : 50°C
 Governor    : powersave
 no_hz       : N/A
 no_irq      : irqpoll
@@ -40,18 +40,18 @@ Modulo u    : 97
 Index r     : 7
 Repetitions : 5
 
-Run 1: 3276.848 ms | 3.277 ns/iteration | checksum: 47996920000
-Run 2: 3079.979 ms | 3.080 ns/iteration | checksum: 47996920000
-Run 3: 3104.939 ms | 3.105 ns/iteration | checksum: 47996920000
-Run 4: 3076.409 ms | 3.076 ns/iteration | checksum: 47996920000
-Run 5: 3171.754 ms | 3.172 ns/iteration | checksum: 47996920000
+Run 1: 2478.888 ms | 2.479 ns/iteration | checksum: 47996920000
+Run 2: 2424.325 ms | 2.424 ns/iteration | checksum: 47996920000
+Run 3: 2437.846 ms | 2.438 ns/iteration | checksum: 47996920000
+Run 4: 2435.633 ms | 2.436 ns/iteration | checksum: 47996920000
+Run 5: 2428.732 ms | 2.429 ns/iteration | checksum: 47996920000
 
 Results
 -------
-Average : 3141.986 ms
-Best    : 3076.409 ms
-Best throughput: 0.33 billion iterations/s
-Best ns/iteration: 3.0764
+Average : 2441.085 ms
+Best    : 2424.325 ms
+Best throughput: 0.41 billion iterations/s
+Best ns/iteration: 2.4243
 Final sink: 47996920000
 
 ------------------------------------------------------------
@@ -66,18 +66,18 @@ Modulo u    : 97
 Index r     : 7
 Repetitions : 5
 
-Run 1: 3648.844 ms | 3.649 ns/iteration | checksum: 47996920000
-Run 2: 3825.205 ms | 3.825 ns/iteration | checksum: 47996920000
-Run 3: 3576.998 ms | 3.577 ns/iteration | checksum: 47996920000
-Run 4: 3531.912 ms | 3.532 ns/iteration | checksum: 47996920000
-Run 5: 3869.618 ms | 3.870 ns/iteration | checksum: 47996920000
+Run 1: 2661.067 ms | 2.661 ns/iteration | checksum: 47996920000
+Run 2: 2671.989 ms | 2.672 ns/iteration | checksum: 47996920000
+Run 3: 2624.443 ms | 2.624 ns/iteration | checksum: 47996920000
+Run 4: 2631.034 ms | 2.631 ns/iteration | checksum: 47996920000
+Run 5: 2767.771 ms | 2.768 ns/iteration | checksum: 47996920000
 
 Results
 -------
-Average : 3690.515 ms
-Best    : 3531.912 ms
-Best throughput: 0.28 billion iterations/s
-Best ns/iteration: 3.5319
+Average : 2671.261 ms
+Best    : 2624.443 ms
+Best throughput: 0.38 billion iterations/s
+Best ns/iteration: 2.6244
 Final sink: 47996920000
 
 ------------------------------------------------------------
@@ -92,18 +92,18 @@ Modulo u    : 97
 Index r     : 7
 Repetitions : 5
 
-Run 1: 3751.233 ms | 3.751 ns/iteration | checksum: 47996920000
-Run 2: 3409.948 ms | 3.410 ns/iteration | checksum: 47996920000
-Run 3: 3642.680 ms | 3.643 ns/iteration | checksum: 47996920000
-Run 4: 3518.867 ms | 3.519 ns/iteration | checksum: 47996920000
-Run 5: 3394.468 ms | 3.394 ns/iteration | checksum: 47996920000
+Run 1: 2647.233 ms | 2.647 ns/iteration | checksum: 47996920000
+Run 2: 2643.650 ms | 2.644 ns/iteration | checksum: 47996920000
+Run 3: 2697.737 ms | 2.698 ns/iteration | checksum: 47996920000
+Run 4: 2654.515 ms | 2.655 ns/iteration | checksum: 47996920000
+Run 5: 2639.002 ms | 2.639 ns/iteration | checksum: 47996920000
 
 Results
 -------
-Average : 3543.439 ms
-Best    : 3394.468 ms
-Best throughput: 0.29 billion iterations/s
-Best ns/iteration: 3.3945
+Average : 2656.428 ms
+Best    : 2639.002 ms
+Best throughput: 0.38 billion iterations/s
+Best ns/iteration: 2.6390
 Final sink: 47996920000
 
 ------------------------------------------------------------
@@ -118,18 +118,18 @@ Modulo u    : 97
 Index r     : 7
 Repetitions : 5
 
-Run 1: 3507.563 ms | 3.508 ns/iteration | checksum: 47996920000
-Run 2: 3489.182 ms | 3.489 ns/iteration | checksum: 47996920000
-Run 3: 2943.992 ms | 2.944 ns/iteration | checksum: 47996920000
-Run 4: 2933.511 ms | 2.934 ns/iteration | checksum: 47996920000
-Run 5: 2910.149 ms | 2.910 ns/iteration | checksum: 47996920000
+Run 1: 2639.712 ms | 2.640 ns/iteration | checksum: 47996920000
+Run 2: 3349.605 ms | 3.350 ns/iteration | checksum: 47996920000
+Run 3: 2861.455 ms | 2.861 ns/iteration | checksum: 47996920000
+Run 4: 3011.807 ms | 3.012 ns/iteration | checksum: 47996920000
+Run 5: 3453.710 ms | 3.454 ns/iteration | checksum: 47996920000
 
 Results
 -------
-Average : 3156.879 ms
-Best    : 2910.149 ms
-Best throughput: 0.34 billion iterations/s
-Best ns/iteration: 2.9101
+Average : 3063.258 ms
+Best    : 2639.712 ms
+Best throughput: 0.38 billion iterations/s
+Best ns/iteration: 2.6397
 Final sink: 47996920000
 
 All benches complete.
